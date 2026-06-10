@@ -143,7 +143,8 @@ export async function saveForm(req, res) {
       sendPreRegistryEmail(datos[0], datos[1], datos[2], idForeign);
     }
     return res.status(200).json({
-      message:"bien"
+      message: "Registro realizado con éxito",
+      code: idForeign
     })
   } catch (e) {
     return res.status(500).json({
