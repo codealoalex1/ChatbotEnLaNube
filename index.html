@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot SEGIP</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <main class="chat-page">
+
+    <section class="chat-wrapper">
+
+      <!-- Panel lateral / presentación -->
+      <aside class="info-panel">
+        <div class="logo-box">
+          <img src="./img/logo1.png" alt="Logo Chatbot SEGIP" class="chat-logo" />
+        </div>
+
+        <h1>Chatbot SEGIP</h1>
+
+        <p>
+          Asistente virtual para consultas sobre cédulas de identidad,
+          licencias de conducir y oficinas cercanas.
+        </p>
+
+        <div class="info-items">
+          <div class="info-item">
+            <i class="bi bi-chat-dots"></i>
+            <span>Consultas rápidas: Realiza cualquier pregunta sobre tramites en el SEGIP.</span>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-file-earmark-text"></i>
+            <span>Pre-registro: Inicia un formulario para registrar información.</span>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-geo-alt"></i>
+            <span>Oficinas cercanas: Encuentra la oficina más cercana a tu ubicación.</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Chat principal -->
+      <section class="chat-card">
+
+        <!-- Header móvil -->
+        <header class="mobile-header">
+          <img src="./img/logo1.png" alt="Logo Chatbot SEGIP" />
+          <div>
+            <h2>Chatbot SEGIP</h2>
+            <p>Asistente virtual</p>
+          </div>
+        </header>
+
+        <!-- Acciones rápidas -->
+        <div class="quick-actions">
+          <button id="btnConsulta" class="action-btn active">
+            <i class="bi bi-chat-left-text"></i>
+            Consulta
+          </button>
+
+          <button id="btnFormulario" class="action-btn">
+            <i class="bi bi-pencil-square"></i>
+            Pre-registro
+          </button>
+
+          <button id="btnUbicacion" class="action-btn">
+            <i class="bi bi-geo-alt"></i>
+            Oficinas
+          </button>
+
+          <button id="btnLimpiar" class="action-btn danger">
+            <i class="bi bi-trash3"></i>
+            Limpiar
+          </button>
+        </div>
+
+        <!-- Área de mensajes -->
+        <div id="chatMessages" class="chat-messages">
+
+          <div class="message bot-message">
+            <div class="avatar bot-avatar">
+              <i class="bi bi-robot"></i>
+            </div>
+
+            <div class="message-content">
+              <strong>SEGIP Bot</strong>
+              <p>
+                ¡Bienvenido! Puedes hacerme consultas sobre cédulas de identidad,
+                licencias de conducir o iniciar un formulario de pre-registro.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Indicador de carga -->
+        <div id="loadingMessage" class="loading-message d-none">
+          <span class="spinner-border spinner-border-sm" role="status"></span>
+          Procesando respuesta...
+        </div>
+
+        <!-- Panel para ingresar ubicación manual -->
+        <div id="locationPanel" class="location-panel d-none">
+        <div class="location-panel-header">
+            <strong>Buscar oficinas cercanas</strong>
+            <button type="button" id="btnCerrarUbicacion" class="close-location-btn">
+                x
+            </button>
+        </div>
+
+        <p>
+            Puedes usar tu ubicación actual o ingresar una ubicación manualmente.
+        </p>
+
+        <div class="location-actions">
+            <button type="button" id="btnUsarUbicacionActual" class="location-btn primary">
+            Usar mi ubicación actual
+            </button>
+        </div>
+
+        <div class="location-inputs">
+            <input
+            type="number"
+            id="inputLatitud"
+            placeholder="Latitud, ejemplo: -16.5000"
+            step="any"
+            />
+
+            <input
+            type="number"
+            id="inputLongitud"
+            placeholder="Longitud, ejemplo: -68.1500"
+            step="any"
+            />
+
+            <button type="button" id="btnBuscarManual" class="location-btn">
+            Buscar con estos datos
+            </button>
+        </div>
+        </div>
+
+        <!-- Entrada -->
+        <form id="chatForm" class="chat-input-area">
+          <input
+            type="text"
+            id="userInput"
+            class="chat-input"
+            placeholder="Escribe tu consulta..."
+            autocomplete="off"
+            required
+          />
+
+          <button type="submit" class="send-btn">
+            <i class="bi bi-send-fill"></i>
+            <span>Enviar</span>
+          </button>
+        </form>
+
+      </section>
+    </section>
+
+    <p class="footer-text">
+      Proyecto Chatbot en la Nube - SEGIP
+    </p>
+
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <!-- Lógica del frontend -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
