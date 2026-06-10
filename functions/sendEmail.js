@@ -18,7 +18,7 @@ const createTransporter = () => {
 
   console.log("hola");
   console.log(
-    `[SMTP Config] Conectando a ${process.env.EMAIL_HOST}:${process.env.EMAIL_PORT} - Secure: ${process.env.EMAIL_SECURE === "true" && port === 465}`,
+    `[SMTP Config] Conectando a ${process.env.EMAIL_HOST}:${process.env.EMAIL_PORT} - Secure: ${process.env.EMAIL_SECURE === "true" && process.env.EMAIL_PORT === 465}`,
   );
 
   return nodemailer.createTransport({
