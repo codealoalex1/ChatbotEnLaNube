@@ -74,11 +74,11 @@ bot.on("message", async (msg) => {
       const { field, status } = await llenarFormulario(chatId, text);
       if (!status) {
         if (text == "S" || text == "s") {
-          await guardarFormulario(chatId);
+          const codigo = await guardarFormulario(chatId);
           await resetearLlenado("formulario", "actualizar", "campo");
           return bot.sendMessage(
             chatId,
-            "Una vez recepcionados sus datos, se le enviara el numero de ticket asignado al correo electrónico proporcionado en el formulario.\nEstamos para servirle.\n¿Tiene alguna otra consulta?",
+            `Pre-registo realizado exitosamente\nId: ${codigo}\nUna vez recepcionados sus datos, se le enviara el numero de ticket al correo electrónico proporcionado en el formulario para confirmar su pre-registro. \nEstamos para servirle.\n¿Tiene alguna otra consulta?`,
           );
         } else if (determinarActualizacion(text)) {
           await establecerLlenado("actualizar");

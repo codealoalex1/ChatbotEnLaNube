@@ -89,8 +89,8 @@ export async function llenarFormulario(chatId, value) {
 export async function actualizarFormulario(chatId, value) {
   const info = {
     key: `user:${chatId}`,
-    value: value
-  }
+    value: value,
+  };
   try {
     const response = await fetch(
       `${process.env.URL_SERVICE_MODEL}api/redis/update-field`,
@@ -148,8 +148,8 @@ export async function guardarFormulario(chatId) {
         body: JSON.stringify(info),
       },
     );
-    const { message } = await response.json();
-    return message;
+    const { message, code } = await response.json();
+    return code;
   } catch (e) {
     console.log(e.message);
     return null;
