@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 /**
  * Configura el transportador de Nodemailer.
@@ -6,22 +6,29 @@ import nodemailer from 'nodemailer';
  */
 const createTransporter = () => {
   // Validación estricta para evitar fallos silenciosos en producción
-  if (!process.env.EMAIL_HOST || !process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    throw new Error("Faltan las variables de entorno para la configuración del correo.");
+  if (
+    !process.env.EMAIL_HOST ||
+    !process.env.EMAIL_USER ||
+    !process.env.EMAIL_PASS
+  ) {
+    throw new Error(
+      "Faltan las variables de entorno para la configuración del correo.",
+    );
   }
 
   return nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT || '465', 10),
-    secure: process.env.EMAIL_SECURE === 'true', // true para puerto 465, false para otros
+    port: Number(process.env.EMAIL_PORT) || 587,
+    secure: process.env.EMAIL_SECURE === "true" && port === 465, // true para puerto 465, false para otros
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
     // Esto asegura que en Railway no haya problemas de handshake SSL/TLS con ciertos proveedores
     tls: {
-      rejectUnauthorized: false /* process.env.NODE_ENV === 'production' */
-    }
+      rejectUnauthorized: false /* process.env.NODE_ENV === 'production' */,
+      ciphers: "SSLv3", // Ayuda a compatibilidad en redes estrictas
+    },
   });
 };
 
@@ -70,7 +77,9 @@ export const sendPreRegistryEmail = async (name, lastname, email, code) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log(`Correo enviado con éxito a ${email}. MessageId: ${info.messageId}`);
+    console.log(
+      `Correo enviado con éxito a ${email}. MessageId: ${info.messageId}`,
+    );
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error(`Error al enviar a ${email}:`, error);
