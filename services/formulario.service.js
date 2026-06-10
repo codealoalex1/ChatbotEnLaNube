@@ -24,7 +24,7 @@ export async function setKeyRedisService(key, value) {
 }
 
 export async function deleteKeyRedisService(key) {
-    await client.DEL(key);
+  await client.DEL(key);
 }
 
 export async function getKeySetRedisService(key, field) {
@@ -49,7 +49,7 @@ export async function fillFormService(key, value) {
         };
       }
       return {
-        field: FIELDS[i+1],
+        field: FIELDS[i + 1],
         again: true,
       };
     }
@@ -57,9 +57,18 @@ export async function fillFormService(key, value) {
 }
 
 export async function formFilledService(key) {
-    let message = "Sus datos son:\n";
-    for (let i = 0; i < FIELDS.length; i++){
-        message += `${FIELDS[i]}: ${await getKeySetRedisService(key, FIELDS[i])}\n`;
-    }
-    return message+="Si todos los datos son correctos, escriba S, si quiere cambiar algún campo, escriba el nombre del campo (Ej. nombre)";
+  let message = "Sus datos son:\n";
+  for (let i = 0; i < FIELDS.length; i++) {
+    message += `${FIELDS[i]}: ${await getKeySetRedisService(key, FIELDS[i])}\n`;
+  }
+  return (message +=
+    "Si todos los datos son correctos, escriba S, si quiere cambiar algún campo, escriba el nombre del campo (Ej. nombre)");
+}
+
+export async function formGetInfoForm(key) {
+  let datos = [];
+  for (let i = 0; i < FIELDS.length; i++) {
+    datos.push(await getKeySetRedisService(key, FIELDS[i]));
+  }
+  return {datos};
 }

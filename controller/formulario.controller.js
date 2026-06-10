@@ -1,11 +1,15 @@
+import { saveFormForeign } from "../services/db.services.js";
+import { generarId } from "../functions/generateId.function.js";
 import {
   deleteKeyRedisService,
   fillFormService,
   formFilledService,
+  formGetInfoForm,
   getKeyRedisService,
   setKeyRedisService,
   setKeySetRedisService,
 } from "../services/formulario.service.js";
+import { sendPreRegistryEmail } from "../functions/sendEmail.js";
 
 export async function getKeyRedisController(req, res) {
   const { key } = req.body;
@@ -118,6 +122,29 @@ export async function formFilledController(req, res) {
     return res.status(200).json({
       message: response,
     });
+  } catch (e) {
+    return res.status(500).json({
+      message: e.message,
+    });
+  }
+}
+
+export async function saveForm(req, res) {
+  const { key } = req.body;
+  if (!key || !key.trim())
+    return res.status(400).json({
+      message: "Debe escribir una llave a buscar",
+    });
+  try {
+    const { datos } = await formGetInfoForm(key);
+    const idForeign = generarId();
+    const response = await saveFormForeign([idForeign, ...datos]);
+    if (response.rowCount) {
+      sendPreRegistryEmail(datos[0], datos[1], datos[2], idForeign);
+    }
+    return res.status(200).json({
+      message:"bien"
+    })
   } catch (e) {
     return res.status(500).json({
       message: e.message,

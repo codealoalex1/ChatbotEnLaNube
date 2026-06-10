@@ -10,3 +10,13 @@ export async function getLocations (){
         throw new Error(e.message);
     }
 }
+
+export async function saveFormForeign(datos) {
+    try {
+        const query = `INSERT INTO formulario_extranjero (id, nombre, apellido_paterno, correo) VALUES ($1, $2, $3, $4)`;
+        const response = await pool.query(query, datos);
+        return response;
+    } catch (e) {
+        throw new Error(e.message);
+    }
+}
