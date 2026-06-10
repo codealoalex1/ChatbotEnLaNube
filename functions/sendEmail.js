@@ -12,7 +12,7 @@ const createTransporter = () => {
 
   return nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT || '587', 10),
+    port: parseInt(process.env.EMAIL_PORT || '465', 10),
     secure: process.env.EMAIL_SECURE === 'true', // true para puerto 465, false para otros
     auth: {
       user: process.env.EMAIL_USER,
@@ -20,7 +20,7 @@ const createTransporter = () => {
     },
     // Esto asegura que en Railway no haya problemas de handshake SSL/TLS con ciertos proveedores
     tls: {
-      rejectUnauthorized: process.env.NODE_ENV === 'production'
+      rejectUnauthorized: false /* process.env.NODE_ENV === 'production' */
     }
   });
 };
