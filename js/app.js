@@ -4,7 +4,7 @@
 
 // Cambia el puerto si tu backend usa otro.
 // Ejemplo Railway: const API_BASE_URL = "https://tu-backend.up.railway.app/";
-const API_BASE_URL = "http://localhost:3300/";
+const API_BASE_URL = "http://chatbotbackend-production-b44d.up.railway.app/";
 
 const FORM_FIELDS = ["nombre", "apellido", "correo"];
 
