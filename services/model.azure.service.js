@@ -37,9 +37,9 @@ Eres el Asistente Virtual oficial del SEGIP Bolivia. Tu única función es brind
         { role: "system", content: systemMessage },
         { role: "user", content: prompt },
       ],
-      max_tokens: 450,
-      temperature: 0.5,
-      top_p: 1,
+      max_tokens: 800,
+      temperature: 0.1,
+      top_p: 0.5,
       model: modelName,
       data_sources: [
         {
@@ -51,7 +51,7 @@ Eres el Asistente Virtual oficial del SEGIP Bolivia. Tu única función es brind
               type: "api_key",
               key: process.env.AZURE_SEARCH_KEY,
             },
-            top_n_documents: 2,
+            top_n_documents: 12,
             strictness: 2,
           },
         },
