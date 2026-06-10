@@ -16,15 +16,10 @@ const createTransporter = () => {
     );
   }
 
-  console.log("hola");
-  console.log(
-    `[SMTP Config] Conectando a ${process.env.EMAIL_HOST}:${process.env.EMAIL_PORT} - Secure: ${process.env.EMAIL_SECURE === "true" && process.env.EMAIL_PORT === 465}`,
-  );
-
   return nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: Number(process.env.EMAIL_PORT) || 587,
-    secure: process.env.EMAIL_SECURE === "true" && port === 465, // true para puerto 465, false para otros
+    secure: process.env.EMAIL_SECURE === "true" && process.env.EMAIL_PORT === 465, // true para puerto 465, false para otros
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
