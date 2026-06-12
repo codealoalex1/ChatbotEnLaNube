@@ -42,7 +42,7 @@ export function determinarUbicaciones(text) {
 }
 
 
-const CAMPOS = ["nombre", "apellido", "correo"];
+const CAMPOS = ["nombre", "apellido", "dni", "correo"];
 export function determinarActualizacion(text) {
   if (CAMPOS.includes(text.toLowerCase())) {
     return true;
