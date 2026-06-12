@@ -7,7 +7,7 @@ if (!process.env.RESEND_API_KEY) {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const sendPreRegistryEmail = async (name, lastname, email="aavalosc@fcpn.edu.bo", code) => {
+export const sendPreRegistryEmail = async (name, lastname, email, code) => {
   // Estructura HTML formal
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
@@ -38,7 +38,7 @@ export const sendPreRegistryEmail = async (name, lastname, email="aavalosc@fcpn.
   try {
     const { data, error } = await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: [email],
+      to: "aavalosc@fcpn.edu.bo",
       subject: `Confirmación de Pre-Registro SEGIP - Código: ${code}`,
       html: htmlContent,
     });
