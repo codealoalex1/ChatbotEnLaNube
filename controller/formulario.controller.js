@@ -1,5 +1,5 @@
 import { saveFormForeign } from "../services/db.services.js";
-import { generarId } from "../functions/generateId.function.js";
+import { generarId } from "../function/generateId.function.js";
 import {
   deleteKeyRedisService,
   fillFormService,
@@ -9,7 +9,7 @@ import {
   setKeyRedisService,
   setKeySetRedisService,
 } from "../services/formulario.service.js";
-import { sendPreRegistryEmail } from "../functions/sendEmail.js";
+import { sendPreRegistryEmail } from "../function/sendEmail.js";
 
 export async function getKeyRedisController(req, res) {
   const { key } = req.body;

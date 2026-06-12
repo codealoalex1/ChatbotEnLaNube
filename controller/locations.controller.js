@@ -1,4 +1,4 @@
-import { calculateDistance } from "../functions/distance.function.js";
+import { calculateDistance } from "../function/distance.function.js";
 
 export async function getLocationsController(req, res) {
     const { lat, lon } = req.body;
