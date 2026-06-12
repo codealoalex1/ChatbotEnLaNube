@@ -139,6 +139,7 @@ export async function saveForm(req, res) {
     const { datos } = await formGetInfoForm(key);
     const idForeign = generarId();
     const response = await saveFormForeign([idForeign, ...datos]);
+    console.log(response)
     if (!response.rowCount) {
       return res.status(400).json({
         message: "Usuario ya registrado",
