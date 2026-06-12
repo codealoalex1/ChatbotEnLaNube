@@ -66,10 +66,10 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
   if (text) {
-    /* if (!(text == "/start") && !(await verificarLlenado())) {
+    if (!(text == "/start") && !(await verificarLlenado())) {
       const response = await consultarModelo(text);
       bot.sendMessage(chatId, response);
-    } */
+    }
     if (await verificarLlenado()) {
       const { field, status } = await llenarFormulario(chatId, text);
       if (!status) {
