@@ -139,13 +139,17 @@ export async function saveForm(req, res) {
     const { datos } = await formGetInfoForm(key);
     const idForeign = generarId();
     const response = await saveFormForeign([idForeign, ...datos]);
-    if (response.rowCount) {
-      sendPreRegistryEmail(datos[0], datos[1], datos[2], idForeign);
+    if (!response.rowCount) {
+      return res.status(400).json({
+        message: "Usuario ya registrado",
+        code: 0,
+      });
     }
+    sendPreRegistryEmail(datos[0], datos[1], datos[2], idForeign);
     return res.status(200).json({
       message: "Registro realizado con éxito",
-      code: idForeign
-    })
+      code: idForeign,
+    });
   } catch (e) {
     return res.status(500).json({
       message: e.message,
