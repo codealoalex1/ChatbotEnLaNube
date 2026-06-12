@@ -138,7 +138,6 @@ export async function saveForm(req, res) {
   try {
     const { datos } = await formGetInfoForm(key);
     const idForeign = generarId();
-    console.log(idForeign);
     const response = await saveFormForeign([idForeign, ...datos]);
     if (!response.rowCount) {
       return res.status(400).json({
@@ -152,7 +151,6 @@ export async function saveForm(req, res) {
       code: idForeign,
     });
   } catch (e) {
-    console.log(e);
     return res.status(500).json({
       message: e.message,
       code: 0,

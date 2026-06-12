@@ -13,7 +13,7 @@ export async function getLocations (){
 
 export async function saveFormForeign(datos) {
     try {
-        const query = `INSERT INTO formulario_extranjero (id, nombre, apellido_paterno, correo) VALUES ($1, $2, $3, $4)`;
+        const query = `INSERT INTO formulario_extranjero (id, nombre, apellido_paterno, DNI, correo) VALUES ($1, $2, $3, $4, $5)`;
         const response = await pool.query(query, datos);
         return response;
     } catch (e) {

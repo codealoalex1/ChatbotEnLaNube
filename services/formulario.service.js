@@ -36,7 +36,7 @@ export async function setKeySetRedisService(key, field, value) {
   await client.expire(key, 60);
 }
 
-const FIELDS = ["nombre", "apellido", "correo"];
+const FIELDS = ["nombre", "apellido", "dni", "correo"];
 
 export async function fillFormService(key, value) {
   for (let i = 0; i < FIELDS.length; i++) {
