@@ -66,17 +66,17 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
   if (text) {
-    if (!(text == "/start") && !(await verificarLlenado())) {
+    /* if (!(text == "/start") && !(await verificarLlenado())) {
       const response = await consultarModelo(text);
       bot.sendMessage(chatId, response);
-    }
+    } */
     if (await verificarLlenado()) {
       const { field, status } = await llenarFormulario(chatId, text);
       if (!status) {
         if (text == "S" || text == "s") {
           const codigo = await guardarFormulario(chatId);
           await resetearLlenado("formulario", "actualizar", "campo");
-          if (codigo == 0) {
+          if (Number(codigo) == 0) {
             return bot.sendMessage(
               chatId,
               `Usted ya solicitó el pre-registro, apersonese con el número de ticket correspondiente a las oficinas para hacer su seguimiento.\n¿Tiene alguna otra consulta?`,
